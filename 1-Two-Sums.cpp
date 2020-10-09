@@ -20,8 +20,8 @@ public:
 		for (std::vector<int>::size_type ix = 0; ix != nums.size(); ++ix) {
 			for (std::vector<int>::size_type j = ix + 1; j != nums.size(); ++j)	{
 				if (nums[ix] + nums[j] == target) {
-					std::vector<int> ilist = { static_cast<int>(ix), static_cast<int>(j) };
-					return ilist;
+					std::vector<int> ret_vec = { static_cast<int>(ix), static_cast<int>(j) };
+					return ret_vec;
 				}
 			}
 		}

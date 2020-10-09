@@ -45,8 +45,7 @@ public:
 			for (i = j; i<a.size(); i++) {
 				if (!s.count(a[i])) {
 					s.insert(a[i]);
-				}
-				else {
+				} else {
 					if (s.size() > max_len) {
 						max_len = s.size();
 					}

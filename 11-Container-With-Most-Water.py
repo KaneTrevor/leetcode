@@ -16,6 +16,7 @@ Input: [1,8,6,2,5,4,8,3,7]
 Output: 49
 """
 
+
 class Solution(object):
     def __init__(self):
         self.storedMaxArea = 0
@@ -37,6 +38,7 @@ class Solution(object):
             else:
                 self.right = self.right - 1
         return self.storedMaxArea
+
 
 if __name__ == '__main__':
     test = Solution()

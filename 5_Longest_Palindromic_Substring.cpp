@@ -32,12 +32,13 @@ public:
 
 		for (i = 0; i < len; i++) {
 			for (j = len - 1; j > 0; j--) {
-				pos_start = x = i;
-				pos_end = y = j;
+				x = i;
+				y = j;
+				pos_start = i;
+				pos_end = j;
 
-				if (i == j - 1 && s[i] == s[j]) {
-					if (pos_end - pos_start + 1 > max_string.size())
-						max_string = s.substr(pos_start, pos_end - pos_start + 1);
+				if (i == j - 1 && s[i] == s[j] && (pos_end - pos_start + 1 > max_string.size())) {
+					max_string = s.substr(pos_start, pos_end - pos_start + 1);
 				}
 
 				while (s[x] == s[y] && y - 1 > x) {
@@ -45,8 +46,7 @@ public:
 					y--;
 				}
 
-				if (x == y ||
-					x == y - 1 && s[x] == s[y]) {
+				if (x == y || x == y - 1 && s[x] == s[y]) {
 					if (pos_end - pos_start + 1 > max_string.size())
 						max_string = s.substr(pos_start, pos_end - pos_start + 1);
 

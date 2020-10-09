@@ -53,13 +53,13 @@ Example 5:
 Input: "-91283472332"
 Output: -2147483648
 Explanation: The number "-91283472332" is out of the range of a 32-bit signed integer.
-Thefore INT_MIN (−231) is returned.
+Thefore INT_MIN (−2^31) is returned.
 */
 
 #include <iostream>
-#include<math.h>
-#include<string>
-#include<vector>
+#include <math.h>
+#include <string>
+#include <vector>
 #include <algorithm>
 
 
@@ -67,7 +67,7 @@ class Solution {
 public:
 	int myAtoi(std::string str) {
 		int len = str.size();
-		if (len < 1) 
+		if (len < 1)
 			return 0;
 
 		int i = 0;	// iterator of str
@@ -82,16 +82,16 @@ public:
 		for (i = 0; i < len; i++) {
 			if (!continual_numbers_flag && (str[i] == '-' || str[i] == '+')
 			    && i + 1 < len && str[i + 1] < 58 && str[i + 1] > 47) {
-				if (str[i] == '-')
-					minus_flag = true;
+				if (str[i] == '-') {
+                    minus_flag = true;
+                }
 				continue;
 			}
 
 			if (str[i] < 58 && str[i] > 47) {
 				p_num[u++] = str[i];
 				continual_numbers_flag = true;
-			}
-			else if (str[i] == ' ') {
+			} else if (str[i] == ' ') {
 				if (continual_numbers_flag)
 					break;
 				else
@@ -102,7 +102,7 @@ public:
 		}
 
 		if (u < 1) {
-			// no numerical 
+			// no numerical
 			delete[] p_num;
 			return 0;
 		}

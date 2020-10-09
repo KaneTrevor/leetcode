@@ -62,6 +62,10 @@ class Solution(object):
         self.counter = 0
 
     def romanToInt(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
         length = len(s)
         if length < 2:
             return self.map[s[0]]
@@ -72,17 +76,19 @@ class Solution(object):
                 if s[x] == 'I' and s[x+1] in ['V', 'X']:
                     self.counter = self.counter + self.map[s[x+1]] - self.map[s[x]]
                     x = x + 2
-                elif s[x] == 'X' and s[x+1] in ['L', 'C']:
+                    continue
+                if s[x] == 'X' and s[x+1] in ['L', 'C']:
                     self.counter = self.counter + self.map[s[x+1]] - self.map[s[x]]
                     x = x + 2
-                elif s[x] == 'C' and s[x+1] in ['D', 'M']:
+                    continue
+                if s[x] == 'C' and s[x+1] in ['D', 'M']:
                     self.counter = self.counter + self.map[s[x+1]] - self.map[s[x]]
                     x = x + 2
-                else:
-                    self.counter = self.counter + self.map[s[x]]
-                    x = x + 1
-        return self.counter
+                    continue
+            self.counter = self.counter + self.map[s[x]]
+            x = x + 1
 
+        return self.counter
 
 if __name__ == '__main__':
     test = Solution()

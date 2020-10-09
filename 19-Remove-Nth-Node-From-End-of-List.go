@@ -48,7 +48,6 @@ func findPreDelNode(p *ListNode, n int) int {
 	}
 }
 
-
 func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	var pIterator *ListNode
 
@@ -66,7 +65,6 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	return head
 }
 
-
 func main() {
 	l5 := ListNode{5, nil}
 	l4 := ListNode{4, &l5}
@@ -74,7 +72,7 @@ func main() {
 	l2 := ListNode{2, &l3}
 	head := &ListNode{1, &l2}
 
-	p := removeNthFromEnd(head, 5)
+	p := removeNthFromEnd(head, 3)
 	for {
 		fmt.Printf("p-val: %d\n", p.Val)
 		if p.Next != nil {

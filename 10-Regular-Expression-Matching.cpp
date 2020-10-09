@@ -28,7 +28,7 @@ Input:
 s = "aa"
 p = "a*"
 Output: true
-Explanation: '*' means zero or more of the precedeng element, 'a'. Therefore, by repeating 'a' once,
+Explanation: '*' means zero or more of the precedent element, 'a'. Therefore, by repeating 'a' once,
 it becomes "aa".
 
 Example 3:
@@ -54,26 +54,28 @@ s = "mississippi"
 p = "mis*is*p*."
 Output: false
 */
+
+
 #include <iostream>
-#include<math.h>
-#include<string>
-#include<vector>
+#include <math.h>
+#include <string>
+#include <vector>
 #include <algorithm>
 
 class Solution {
 public:
-	bool check(char a, char b)
-	{
+	bool check(char a, char b) {
 		if (a == b || b == '.')
 			return true;
 		return false;
 	}
+
 	bool isMatch(std::string s, std::string p) {
 		int size_s = s.size();
 		int size_p = p.size();
 		int map_match[size_s + 1][size_p + 1];
         int i = 0;
-        int j = 0；
+        int j = 0;
 
 		for (i = 0; i <= size_s; i++) {
 			for (j = 0; j <= size_p; j++) {
@@ -94,11 +96,10 @@ public:
 
 				if (p[j - 1] == '*') {
 					map_match[i][j] |= map_match[i][j - 2];
-					if (check(s[i - 1], p[j - 2])){
+					if (check(s[i - 1], p[j - 2])) {
 						map_match[i][j] |= map_match[i - 1][j];
 					}
-				}
-				else{
+				} else {
 					map_match[i][j] |= check(s[i - 1], p[j - 1]) && map_match[i - 1][j - 1];
 				}
 			}

@@ -41,10 +41,10 @@ class Solution(object):
             return False
 
         jumpFlag = False
-        NoneZeroFlag = True
+        noneZeroFlag = True
         for i in xrange(length - 1):
             if nums[i] == 0:
-                NoneZeroFlag = False
+                noneZeroFlag = False
                 jumpFlag = False
 
                 for p in xrange(i):
@@ -55,7 +55,7 @@ class Solution(object):
                 if not jumpFlag:
                     return False
 
-        if NoneZeroFlag:
+        if noneZeroFlag:
             return True
         else:
             return jumpFlag

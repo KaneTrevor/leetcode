@@ -73,22 +73,15 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 }
 
 func main() {
-	l11 := ListNode{1, nil}
-	l12 := ListNode{2, nil}
 	l13 := ListNode{3, nil}
-	l11.Next = &l12
-	l12.Next = &l13
+	l12 := ListNode{2, &l13}
+	l11 := ListNode{1, &l12}
 
-	l21 := ListNode{-3, nil}
-	l22 := ListNode{0, nil}
-	l23 := ListNode{-2, nil}
-	l24 := ListNode{6, nil}
 	l25 := ListNode{9, nil}
-	l21.Next = &l22
-	l22.Next = &l23
-	l23.Next = &l24
-	l24.Next = &l25
-
+	l24 := ListNode{6, &l25}
+	l23 := ListNode{-2, &l24}
+	l22 := ListNode{0, &l23}
+	l21 := ListNode{-3, &l22}
 
 	p := mergeTwoLists(&l11, &l21)
 	for {
