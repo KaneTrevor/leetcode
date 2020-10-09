@@ -57,7 +57,6 @@ func countAndSay(n int) string {
 	}
 }
 
-
 func main() {
 	str := countAndSay(10)
 	fmt.Println("str", str)

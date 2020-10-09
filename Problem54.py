@@ -25,9 +25,6 @@ Output: [1,2,3,4,8,12,11,10,9,5,6,7]
 
 
 class Solution(object):
-    def __init__(self):
-        pass
-
     def spiralOrder(self, matrix):
         row = len(matrix)
         if row < 1:
