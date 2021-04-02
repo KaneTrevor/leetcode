@@ -47,25 +47,17 @@ class Problem226 {
         }
     }
 
-    public void reverseTree(TreeNode root) {
-        if (root == null) {
-            return;
-        }
-
-        reverseTree(root.left);
-        reverseTree(root.right);
-
-        TreeNode r = root.right;
-        root.right = root.left;
-        root.left = r;
-    }
-
     public TreeNode invertTree(TreeNode root) {
         if (root == null) {
             return null;
         }
 
-        reverseTree(root);
+        invertTree(root.left);
+        invertTree(root.right);
+
+        TreeNode r = root.right;
+        root.right = root.left;
+        root.left = r;
         return root;
     }
 

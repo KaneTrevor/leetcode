@@ -37,7 +37,6 @@ class Problem404 {
     }
 
     int sumOfLeft = 0;
-
     private void travelTree(TreeNode root) {
         if (root == null)
             return;

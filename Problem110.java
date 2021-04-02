@@ -31,8 +31,6 @@ The number of nodes in the tree is in the range [0, 5000].
 */
 
 
-import java.util.*;
-
 class Problem110 {
     public class TreeNode {
         int val;
@@ -55,34 +53,11 @@ class Problem110 {
     boolean balanceTree = true;
 
     public int maxDepth(TreeNode root) {
-        if (root != null) {
-            return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
-        }
-        return 0;
-    }
-
-    public void traverTree(TreeNode root) {
-        if (root == null) {
-            return;
-        }
-
-        int lDepth = maxDepth(root.left);
-        int rDepth = maxDepth(root.right);
-
-        if (Math.abs(lDepth - rDepth) > 1) {
-            balanceTree = false;
-        }
-
-        traverTree(root.left);
-        traverTree(root.right);
-    }
-
-    public int maxDepth2(TreeNode root) {
         if (root == null) {
             return 0;
         }
-        int lDepth = maxDepth2(root.left);
-        int rDepth = maxDepth2(root.right);
+        int lDepth = maxDepth(root.left);
+        int rDepth = maxDepth(root.right);
 
         if (Math.abs(lDepth - rDepth) > 1) {
             balanceTree = false;
@@ -96,8 +71,7 @@ class Problem110 {
             return true;
         }
 
-        //traverTree(root);
-        maxDepth2(root);
+        maxDepth(root);
         return balanceTree;
     }
 
@@ -107,25 +81,24 @@ class Problem110 {
 
         Problem110 pr = new Problem110();
 
-        TreeNode a6 = pr.new TreeNode(8);
-        TreeNode a5 = pr.new TreeNode(7, a6, null);
-        TreeNode a4 = pr.new TreeNode(15);
-        TreeNode a3 = pr.new TreeNode(20, a4, a5);
-        TreeNode a2 = pr.new TreeNode(9);
-        TreeNode a1 = pr.new TreeNode(3, a2, a3);
+        //TreeNode a6 = pr.new TreeNode(8);
+        //TreeNode a5 = pr.new TreeNode(7, a6, null);
+        //TreeNode a4 = pr.new TreeNode(15);
+        //TreeNode a3 = pr.new TreeNode(20, a4, a5);
+        //TreeNode a2 = pr.new TreeNode(9);
+        //TreeNode a1 = pr.new TreeNode(3, a2, a3);
 
         //TreeNode a3 = pr.new TreeNode(3);
         //TreeNode a2 = pr.new TreeNode(2, null, a3);
         //TreeNode a1 = pr.new TreeNode(1, null, a2);
-        //
-        //
-        //TreeNode a8 = pr.new TreeNode(8);
-        //TreeNode a6 = pr.new TreeNode(6);
-        //TreeNode a5 = pr.new TreeNode(5);
-        //TreeNode a4 = pr.new TreeNode(4, a8, null);
-        //TreeNode a3 = pr.new TreeNode(3, a6, null);
-        //TreeNode a2 = pr.new TreeNode(2, a4, a5);
-        //TreeNode a1 = pr.new TreeNode(1, a2, a3);
+
+        TreeNode a8 = pr.new TreeNode(8);
+        TreeNode a6 = pr.new TreeNode(6);
+        TreeNode a5 = pr.new TreeNode(5);
+        TreeNode a4 = pr.new TreeNode(4, a8, null);
+        TreeNode a3 = pr.new TreeNode(3, a6, null);
+        TreeNode a2 = pr.new TreeNode(2, a4, a5);
+        TreeNode a1 = pr.new TreeNode(1, a2, a3);
 
         boolean ret = new Problem110().isBalanced(a1);
 

@@ -56,56 +56,42 @@ class Problem337 {
         }
     }
 
-    int stackCount = 0;
+    //public int rob2(TreeNode root) {
+    //    if (root == null)
+    //        return 0;
+    //
+    //    int sum1 = root.val;
+    //
+    //    if (root.left != null)
+    //        sum1 += rob2(root.left.left) + rob2(root.left.right);
+    //    if (root.right != null)
+    //        sum1 += rob2(root.right.left) + rob2(root.right.right);
+    //
+    //    int sum2 = rob2(root.left) + rob2(root.right);
+    //    return Math.max(sum1, sum2);
+    //}
 
-    private int travelTree(TreeNode root, boolean rob, int count) {
+    private int[] robSum(TreeNode root) {
+        int[] res = new int[2];
         if (root == null)
-            return 0;
+            return res;
 
-        stackCount++;
+        int[] left = robSum(root.left);
+        int[] right = robSum(root.right);
 
-        if (root.left == null && root.right == null)
-            return rob ? root.val : 0;
-        else if (rob)
-            return root.val + travelTree(root.left, false, 0) + travelTree(root.right, false, 0);
-        else if (root.left == null) {
-            return count > 1 ? travelTree(root.right, true, 0) :
-                    Math.max(travelTree(root.right, false, count + 1), travelTree(root.right, true, 0));
-        } else if (root.right == null) {
-            return count > 1 ? travelTree(root.left, true, 0) :
-                    Math.max(travelTree(root.left, false, count + 1), travelTree(root.left, true, 0));
-        } else if (count > 1) {
-            return travelTree(root.left, true, 0) + travelTree(root.right, true, 0);
-        } else return Math.max(
-                travelTree(root.left, true, 0) + travelTree(root.right, true, 0),
-                Math.max(travelTree(root.left, false, count + 1) + travelTree(root.right, false, count + 1),
-                        Math.max(
-                                travelTree(root.left, false, count + 1) + travelTree(root.right, true, 0),
-                                travelTree(root.left, true, 0) + travelTree(root.right, false, count + 1))));
-    }
+        //res[0]: the sum of childs
+        res[0] = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);
 
-    public int rob2(TreeNode root) {
-        if (root == null)
-            return 0;
-
-        return Math.max(travelTree(root, true, 0), travelTree(root, false, 0));
+        //res[1]: the root adds child's children
+        res[1] = root.val + left[0] + right[0];
+        return res;
     }
 
     public int rob(TreeNode root) {
         if (root == null)
             return 0;
-
-        int sum1 = root.val;
-
-        if (root.left != null)
-            sum1 += rob(root.left.left) + rob(root.left.right);
-
-        if (root.right != null)
-            sum1 += rob(root.right.left) + rob(root.right.right);
-
-        int sum2 = rob(root.left) + rob(root.right);
-
-        return Math.max(sum1, sum2);
+        int[] value = robSum(root);
+        return Math.max(value[0], value[1]);
     }
 
     public static void main(String[] args) {
@@ -133,12 +119,10 @@ class Problem337 {
         TreeNode a2 = pr.new TreeNode(17, a4, a5);
         TreeNode a1 = pr.new TreeNode(21, a2, a3);
 
-        Problem337 test = new Problem337();
-        int ret = test.rob(a1);
-
+        int ret = pr.rob(a1);
         end = System.currentTimeMillis();
         System.out.println("Output:" + ret);
-        System.out.println("stackCount:" + test.stackCount);
+        //System.out.println("stackCount:" + test.stackCount);
         System.out.println("Run Time:" + (end - start) + " ms");
     }
 

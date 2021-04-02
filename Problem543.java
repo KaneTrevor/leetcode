@@ -38,7 +38,6 @@ class Problem543 {
     }
 
     int maxDiameter = 0;
-
     public int sumDepth(TreeNode root) {
         if (root == null) {
             return 0;
@@ -55,10 +54,6 @@ class Problem543 {
     }
 
     public int diameterOfBinaryTree(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-
         sumDepth(root);
         return maxDiameter;
     }

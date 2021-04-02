@@ -63,9 +63,9 @@ class Problem687 {
         return Math.max(leftNodes, rightNodes);
     }
 
-    private void travelTree(TreeNode root) {
+    public int longestUnivaluePath(TreeNode root) {
         if (root == null)
-            return;
+            return 0;
 
         int leftNodes = 0, rightNodes = 0;
         if (root.left != null && root.val == root.left.val)
@@ -77,15 +77,8 @@ class Problem687 {
         if (leftNodes + rightNodes > maxTreeEdges)
             maxTreeEdges = leftNodes + rightNodes;
 
-        travelTree(root.left);
-        travelTree(root.right);
-    }
-
-    public int longestUnivaluePath(TreeNode root) {
-        if (root == null)
-            return 0;
-
-        travelTree(root);
+        longestUnivaluePath(root.left);
+        longestUnivaluePath(root.right);
         return maxTreeEdges;
     }
 
@@ -95,21 +88,21 @@ class Problem687 {
 
         Problem687 pr = new Problem687();
 
-        //TreeNode a7 = pr.new TreeNode(1);
-        //TreeNode a6 = pr.new TreeNode(1);
-        //TreeNode a5 = pr.new TreeNode(1);
-        //TreeNode a4 = pr.new TreeNode(1);
-        //TreeNode a3 = pr.new TreeNode(1, a4, a5 );
-        //TreeNode a2 = pr.new TreeNode(1, a6, a7 );
-        //TreeNode a1 = pr.new TreeNode(1, a2, a3);
-        //TreeNode a0 = pr.new TreeNode(1, null, a1);
-
-        TreeNode a6 = pr.new TreeNode(5);
+        TreeNode a7 = pr.new TreeNode(1);
+        TreeNode a6 = pr.new TreeNode(1);
         TreeNode a5 = pr.new TreeNode(1);
         TreeNode a4 = pr.new TreeNode(1);
-        TreeNode a3 = pr.new TreeNode(5, a4, a5);
-        TreeNode a2 = pr.new TreeNode(5, a6, null);
-        TreeNode a0 = pr.new TreeNode(5, a2, a3);
+        TreeNode a3 = pr.new TreeNode(1, a4, a5 );
+        TreeNode a2 = pr.new TreeNode(1, a6, a7 );
+        TreeNode a1 = pr.new TreeNode(1, a2, a3);
+        TreeNode a0 = pr.new TreeNode(1, null, a1);
+
+        //TreeNode a6 = pr.new TreeNode(5);
+        //TreeNode a5 = pr.new TreeNode(1);
+        //TreeNode a4 = pr.new TreeNode(1);
+        //TreeNode a3 = pr.new TreeNode(5, a4, a5);
+        //TreeNode a2 = pr.new TreeNode(5, a6, null);
+        //TreeNode a0 = pr.new TreeNode(5, a2, a3);
         int ret = new Problem687().longestUnivaluePath(a0);
         end = System.currentTimeMillis();
         System.out.println("Output:" + ret);

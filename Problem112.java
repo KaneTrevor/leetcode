@@ -46,7 +46,7 @@ class Problem112 {
     boolean hasPathSum = false;
 
     public void addNodeSum(TreeNode root, int sum) {
-        if (root == null)
+        if (root == null || hasPathSum)
             return;
 
         if (root.left == null && root.right == null && root.val + sum == target) {

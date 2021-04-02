@@ -30,6 +30,71 @@ Return 3. The paths that sum to 8 are:
 
 */
 
+//HashSet<String> pathSet;
+//private void countList(ArrayList<Pair<Integer, String>> list) {
+//    for (int i = 0; i < list.size(); i++) {
+//        int sum = 0;
+//
+//        for (int j = i; j < list.size(); j++) {
+//            sum += list.get(j).getKey();
+//
+//            if (sum == target) {
+//                StringBuilder base = new StringBuilder();
+//
+//                for (int k = 0; k < i; k++) {
+//                    base.append(list.get(k).getValue());
+//                }
+//                base.append(" ");
+//
+//                StringBuilder path = new StringBuilder();
+//                for (int k = i; k <= j; k++) {
+//                    path.append(list.get(k).getValue());
+//                }
+//                base.append(path);
+//
+//                if (!pathSet.contains(base.toString())) {
+//                    pathSumNum++;
+//                    System.out.println(path.toString());
+//                    pathSet.add(base.toString());
+//                }
+//            }
+//        }
+//    }
+//}
+//
+//private void addPathSum(TreeNode root, String c, ArrayList<Pair<Integer, String>> list) {
+//    list.add(new Pair<>(root.val, c));
+//
+//    if (root.left == null && root.right == null) {
+//        countList(list);
+//        return;
+//    }
+//
+//    if (root.left != null) {
+//        ArrayList<Pair<Integer, String>> sumList = new ArrayList<>(list);
+//        addPathSum(root.left, "l", sumList);
+//    }
+//
+//    if (root.right != null) {
+//        ArrayList<Pair<Integer, String>> sumList = new ArrayList<>(list);
+//        addPathSum(root.right, "r", sumList);
+//    }
+//}
+
+
+//public int pathSum2(TreeNode root, int sum) {
+//    if (root == null) return 0;
+//    int ret = pathSumStartWithRoot(root, sum) + pathSum(root.left, sum) + pathSum(root.right, sum);
+//    return ret;
+//}
+//
+//private int pathSumStartWithRoot(TreeNode root, int sum) {
+//    if (root == null) return 0;
+//    int ret = 0;
+//    if (root.val == sum) ret++;
+//    ret += pathSumStartWithRoot(root.left, sum - root.val) + pathSumStartWithRoot(root.right, sum - root.val);
+//    return ret;
+//}
 
 
 class Problem437 {
@@ -52,76 +117,10 @@ class Problem437 {
         }
     }
 
-    //HashSet<String> pathSet;
-    //private void countList(ArrayList<Pair<Integer, String>> list) {
-    //    for (int i = 0; i < list.size(); i++) {
-    //        int sum = 0;
-    //
-    //        for (int j = i; j < list.size(); j++) {
-    //            sum += list.get(j).getKey();
-    //
-    //            if (sum == target) {
-    //                StringBuilder base = new StringBuilder();
-    //
-    //                for (int k = 0; k < i; k++) {
-    //                    base.append(list.get(k).getValue());
-    //                }
-    //                base.append(" ");
-    //
-    //                StringBuilder path = new StringBuilder();
-    //                for (int k = i; k <= j; k++) {
-    //                    path.append(list.get(k).getValue());
-    //                }
-    //                base.append(path);
-    //
-    //                if (!pathSet.contains(base.toString())) {
-    //                    pathSumNum++;
-    //                    System.out.println(path.toString());
-    //                    pathSet.add(base.toString());
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
-    //
-    //private void addPathSum(TreeNode root, String c, ArrayList<Pair<Integer, String>> list) {
-    //    list.add(new Pair<>(root.val, c));
-    //
-    //    if (root.left == null && root.right == null) {
-    //        countList(list);
-    //        return;
-    //    }
-    //
-    //    if (root.left != null) {
-    //        ArrayList<Pair<Integer, String>> sumList = new ArrayList<>(list);
-    //        addPathSum(root.left, "l", sumList);
-    //    }
-    //
-    //    if (root.right != null) {
-    //        ArrayList<Pair<Integer, String>> sumList = new ArrayList<>(list);
-    //        addPathSum(root.right, "r", sumList);
-    //    }
-    //}
-
-
-    //public int pathSum2(TreeNode root, int sum) {
-    //    if (root == null) return 0;
-    //    int ret = pathSumStartWithRoot(root, sum) + pathSum(root.left, sum) + pathSum(root.right, sum);
-    //    return ret;
-    //}
-    //
-    //private int pathSumStartWithRoot(TreeNode root, int sum) {
-    //    if (root == null) return 0;
-    //    int ret = 0;
-    //    if (root.val == sum) ret++;
-    //    ret += pathSumStartWithRoot(root.left, sum - root.val) + pathSumStartWithRoot(root.right, sum - root.val);
-    //    return ret;
-    //}
-
     int target;
     int pathSumNum = 0;
 
-    public void treeTravel(TreeNode root, int sum, int startTimes) {
+    public void treeTravel(TreeNode root, int sum, int pathCount) {
         if (root == null)
             return;
 
@@ -130,17 +129,17 @@ class Problem437 {
         }
 
         if (root.left != null) {
-            treeTravel(root.left, root.val + sum, startTimes);
+            treeTravel(root.left, root.val + sum, pathCount + 1);
 
-            if (startTimes == 0)
-                treeTravel(root.left, 0, startTimes + 1);
+            if (pathCount == 0)
+                treeTravel(root.left, 0, 0);
         }
 
         if (root.right != null) {
-            treeTravel(root.right, root.val + sum, startTimes);
+            treeTravel(root.right, root.val + sum, pathCount + 1);
 
-            if (startTimes == 0)
-                treeTravel(root.right, 0, startTimes + 1);
+            if (pathCount == 0)
+                treeTravel(root.right, 0, 0);
         }
     }
 
@@ -161,7 +160,7 @@ class Problem437 {
         Problem437 pr = new Problem437();
         int sum = 0;
 
-        //sum=8, ret= 2
+        //sum=8, ret= 3
         //TreeNode a9 = pr.new TreeNode(1);
         //TreeNode a8 = pr.new TreeNode(-2);
         //TreeNode a7 = pr.new TreeNode(3);
