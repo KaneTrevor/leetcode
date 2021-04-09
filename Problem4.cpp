@@ -72,7 +72,7 @@ public:
                 }
 
                 if (ib >= b.size()) {
-                    //do not find median after traversing list b, then the median must in list b
+                    //do not find median after traversing list b, then the median must in list a
                     if (odd) {
                         ret = a[total_size / 2 - b.size()];
                         break;
